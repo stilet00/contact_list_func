@@ -1,7 +1,7 @@
 import React from 'react';
 import SingleContact from "../SingleContact/SingleContact";
 
-function ContactList({ contacts, deleteOne, onEdit }) {
+function ContactList({ contacts, deleteOne, onEdit, onAdd }) {
     return (
         <table>
             <tbody>
@@ -15,6 +15,14 @@ function ContactList({ contacts, deleteOne, onEdit }) {
                         />
                     )
                 })}
+                <tr>
+                    <td>
+                        <button
+                        onClick={onAdd}
+                        >Add new contact
+                        </button>
+                    </td>
+                </tr>
             </tbody>
 
         </table>
