@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-import {addOne, deleteOne, editOne, getContacts} from "../../services/asyncRequests";
 import ContactList from "../ContactList/ContactList";
 import Form from "../Form/Form";
 import './Contacts.css'
@@ -9,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import {useContacts, useTheme} from "./hooks";
 
 const IOSSwitch = withStyles((theme) => ({
     root: {
@@ -65,60 +64,20 @@ const IOSSwitch = withStyles((theme) => ({
 // ========== materialUI
 
 export default function Contacts(props) {
-    const [contacts, setContacts] = useState([])
-    const [formShown, setFormShown] = useState(false)
-    const [editedContact, setEditedContact] = useState(null)
-
-    const [state, setState] = useState({
-        checkedA: true,
-        checkedB: true,
-        checkedC: true,
-    });
-
-    const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-    };
-
-    useEffect(() => {
-        getContacts().then(contacts => setContacts(contacts.data))
-    }, [])
-    // useEffect(() => {
-    //     setFormShown(localStorage.setItem('windowsState', formShown))
-    // }, [formShown])
-
-    function saveToggleState() {
-        setFormShown(!formShown)
-        setFormShown(!formShown)
-    }
-    function deleteContact(e) {
-        deleteOne(e.target.parentNode.parentNode.id).then(res => {
-            setContacts(contacts.filter(item => item.id !== res.data.id).reverse())
-        })
-    }
-    function editePressed(data) {
-        setEditedContact(data)
-        setFormShown(!formShown)
-    }
-    function saveContact(contact) {
-        if (!contact.id) {
-            addOne(contact).then(res => {
-                setFormShown(!formShown)
-                setContacts([...contacts, res.data])
-            })
-        } else {
-            editOne(contact).then(res => {
-                setEditedContact(null)
-                setFormShown(!formShown)
-                setContacts(contacts.map(item => item.id === res.data.id ?  res.data :  item))
-            })
-        }
-
-    }
-    function cancelEditing() {
-        setFormShown(!formShown)
-        setEditedContact(null)
-    }
-
+    const {
+        contacts,
+        editedContact,
+        deleteContact,
+        cancelEditing,
+        editPressed,
+        saveContact,
+        saveToggleState,
+        formShown
+    } = useContacts()
+    const {
+        state,
+        handleChange
+    } = useTheme()
 
     let page
     if (!formShown) {
@@ -126,7 +85,7 @@ export default function Contacts(props) {
             <ContactList
             contacts={contacts}
             deleteOne={deleteContact}
-            onEdit={editePressed}
+            onEdit={editPressed}
             onAdd={saveToggleState}
         />
     } else {
@@ -142,7 +101,7 @@ export default function Contacts(props) {
         <div className={'container'}>
             <FormGroup>
                 <FormControlLabel
-                    control={<IOSSwitch checked={state.checkedB} onChange={handleChange} name="checkedB" />}
+                    control={<IOSSwitch checked={state.themeSwitcher} onChange={handleChange} name="themeSwitcher" />}
                 />
             </FormGroup>
             {page}
