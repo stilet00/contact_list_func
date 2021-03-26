@@ -2,12 +2,16 @@ import ContactList from "../ContactList/ContactList";
 import Form from "../Form/Form";
 import './Contacts.css'
 
+
 // ========== materialUI
 import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import {useContacts, useTheme} from "./hooks";
+import {useContext} from "react";
+import {ThemeContext} from "../../themes/theme-context";
+
 
 const IOSSwitch = withStyles((theme) => ({
     root: {
@@ -98,14 +102,17 @@ export default function Contacts(props) {
 
     }
     return (
-        <div className={'container'}>
-            <FormGroup>
-                <FormControlLabel
-                    control={<IOSSwitch checked={state.themeSwitcher} onChange={handleChange} name="themeSwitcher" />}
-                />
-            </FormGroup>
-            {page}
 
-        </div>
+            <div className={'container'}>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={<IOSSwitch checked={state.themeSwitcher} onChange={handleChange} name="themeSwitcher" />}
+                        />
+                    </FormGroup>
+                    {page}
+            </div>
+
+
     );
 }
+
