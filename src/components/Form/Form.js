@@ -1,29 +1,14 @@
 import './Form.css'
-import { useState } from 'react';
+import { useForm } from "./hooks";
 
 
 function Form({savePressed, givenContact, cancelPressed}) {
-    const [contact, setContact] = useState(givenContact || {name: '', surname: '', phone: ''})
+    const {
+        contact,
+        saveCont,
+        onInputChange
+    } = useForm(givenContact, savePressed)
 
-    function saveCont(e) {
-        if (checkFields()) {
-            e.preventDefault()
-            savePressed(contact)
-        } else {
-            e.preventDefault()
-            alert("Something is wrong!")
-
-        }
-
-    }
-    function onInputChange(e) {
-        setContact({...contact, [e.target.name]: e.target.value.trim()})
-
-
-    }
-    function checkFields() {
-        return contact.name && contact.surname && contact.phone ? true : false
-    }
 
     return (
         <form action=""

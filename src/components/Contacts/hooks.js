@@ -56,19 +56,3 @@ export function useContacts() {
         setFormShown
     }
 }
-export function useTheme() {
-    const [state, setState] = useState({
-        themeSwitcher: true,
-    });
-    const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked })
-        console.log(state)
-        ;
-    };
-    return {
-        state,
-        setState,
-        handleChange
-    }
-
-}

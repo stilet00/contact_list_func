@@ -1,15 +1,49 @@
-import {createContext} from 'react'
-export const themes = {
-    light: {
-        foreground: '#000000',
-        background: '#eeeeee',
-    },
-    dark: {
-        foreground: '#ffffff',
-        background: '#222222',
-    },
-};
+import {createContext, useState} from 'react'
 
-export const ThemeContext = createContext(
-    themes.light
-);
+export const THEMES = {
+    white: {
+        background: 'white',
+        color: 'blue'
+    },
+    black: {
+        background: 'grey',
+        color: 'white'
+    },
+
+}
+export let themeContext = createContext(null)
+export function useThemeContext() {
+    const [theme, setTheme] = useState(THEMES.white)
+    const [state, setState] = useState({
+        themeSwitcher: true,
+    });
+
+    function setWhiteTheme() {
+        setTheme(THEMES.white)
+    }
+    function setBlackTheme() {
+        setTheme(THEMES.black)
+    }
+
+    const handleChange = (event) => {
+        if (state.themeSwitcher) {
+            setState({ ...state, [event.target.name]: event.target.checked })
+            setBlackTheme()
+        }
+        else {
+            setState({ ...state, [event.target.name]: event.target.checked })
+            setWhiteTheme()
+        }
+        ;
+    };
+
+    const contextValue = {
+        theme,
+        state,
+        handleChange
+    }
+    return {
+        contextValue
+    }
+
+}

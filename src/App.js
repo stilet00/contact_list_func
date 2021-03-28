@@ -1,17 +1,17 @@
 import './App.css';
 import React from 'react'
 import Contacts from "./components/Contacts/Contacts";
-import {ThemeContext, themes} from "./themes/theme-context";
+import {themeContext, useThemeContext} from "./themes/theme-context";
 
-
+const UserContext = themeContext
 
 
 function App() {
-
+    const {contextValue} = useThemeContext()
   return (
-              <ThemeContext.Provider value={themes.light}>
-                <Contacts />
-              </ThemeContext.Provider>
+            <UserContext.Provider value={contextValue}>
+              <Contacts />
+            </UserContext.Provider>
 
   );
 }
