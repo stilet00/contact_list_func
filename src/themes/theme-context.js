@@ -3,11 +3,9 @@ import {createContext, useState} from 'react'
 export const THEMES = {
     white: {
         background: 'white',
-        color: 'blue'
     },
     black: {
-        background: 'grey',
-        color: 'white'
+        background: '#e5e5e5',
     },
 
 }

@@ -1,7 +1,5 @@
-form {
-    display: flex;
-    flex-direction: column;
-}
+
 input {
     margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
 }

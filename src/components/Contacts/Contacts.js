@@ -9,6 +9,7 @@ import { themeContext } from "../../themes/theme-context";
 import {IOSSwitch} from "../IOSSwitch/IOSSwitch";
 
 
+
 export default function Contacts(props) {
     const {
         contacts,
@@ -20,11 +21,6 @@ export default function Contacts(props) {
         saveToggleState,
         formShown
     } = useContacts()
-    const {
-        theme,
-        state,
-        handleChange
-    } = useContext(themeContext)
     let page
     if (!formShown) {
         page =
@@ -42,12 +38,7 @@ export default function Contacts(props) {
         />
     }
     return (
-                <div className={'container'} style={theme}>
-                        <FormGroup>
-                            <FormControlLabel
-                                control={<IOSSwitch checked={state.themeSwitcher} onChange={handleChange} name="themeSwitcher" />}
-                            />
-                        </FormGroup>
+                <div className={'container'}>
                         {page}
                 </div>
     );
