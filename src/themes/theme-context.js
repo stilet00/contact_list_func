@@ -12,9 +12,7 @@ export const THEMES = {
 export let themeContext = createContext(null)
 export function useThemeContext() {
     const [theme, setTheme] = useState(THEMES.white)
-    const [state, setState] = useState({
-        themeSwitcher: true,
-    });
+    const [isLight, setIsLight] = useState( true);
 
     function setWhiteTheme() {
         setTheme(THEMES.white)
@@ -23,13 +21,13 @@ export function useThemeContext() {
         setTheme(THEMES.black)
     }
 
-    const handleChange = (event) => {
-        if (state.themeSwitcher) {
-            setState({ ...state, [event.target.name]: event.target.checked })
+    const handleChange = (value) => {
+        if (isLight) {
+            setIsLight(value)
             setBlackTheme()
         }
         else {
-            setState({ ...state, [event.target.name]: event.target.checked })
+            setIsLight(value)
             setWhiteTheme()
         }
         ;
@@ -37,7 +35,7 @@ export function useThemeContext() {
 
     const contextValue = {
         theme,
-        state,
+        isLight,
         handleChange
     }
     return {

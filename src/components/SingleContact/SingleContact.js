@@ -4,17 +4,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 function SingleContact( { contact, deleteCont, onEdit }) {
-    function editePressed() {
-        onEdit(contact)
-    }
     return (
         <TableRow id={ contact.id }>
             <TableCell>{ contact.name }</TableCell>
             <TableCell>{ contact.surname }</TableCell>
             <TableCell>{ contact.phone }</TableCell>
             <TableCell>
-                <Button variant="contained" onClick={ deleteCont }>DELETE</Button>
-                <Button variant="contained" onClick={editePressed}>EDIT</Button>
+                <Button variant="contained" onClick={() => deleteCont(contact.id) }>DELETE</Button>
+                <Button variant="contained" onClick={() => onEdit(contact)}>EDIT</Button>
             </TableCell>
         </TableRow>
     );

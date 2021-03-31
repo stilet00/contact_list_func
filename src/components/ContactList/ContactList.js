@@ -22,13 +22,13 @@ const useStyles = makeStyles({
 
 
 function ContactList({ contacts, deleteOne, onEdit, onAdd }) {
-    const { theme,  handleChange, state} = useContext(themeContext)
+    const { theme,  handleChange, isLight} = useContext(themeContext)
     const classes = useStyles();
     return (
         <TableContainer component={Paper} style={theme}>
             <FormGroup style={{marginLeft: 1 + 'em', background: theme.background}}>
                 <FormControlLabel
-                    control={<IOSSwitch checked={state.themeSwitcher} onChange={handleChange} name="themeSwitcher"  />}
+                    control={<IOSSwitch checked={isLight} onChange={(event) => handleChange(event.target.checked)} name="themeSwitcher"  />}
                 />
             </FormGroup>
             <Table className={classes.table} size="small" aria-label="a dense table" style={theme}>

@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {addOne, deleteOne, editOne, getContacts} from "../../services/asyncRequests";
+    import {useEffect, useState} from "react";
+import {addOne, deleteOne, editOne, getContacts} from "../../services/asyncContacts";
 
 
 export function useContacts() {
@@ -10,9 +10,11 @@ export function useContacts() {
         getContacts().then(contacts => setContacts(contacts.data))
     }, [])
 
-    function deleteContact(e) {
-        deleteOne(e.target.parentNode.parentNode.id).then(res => {
-            setContacts(contacts.filter(item => item.id !== res.data.id).reverse())
+    function deleteContact(contactId) {
+        deleteOne(contactId)
+            .then(res => {
+            setContacts(contacts.filter(item => item.id !== res.data.id).reverse()
+            )
         })
     }
     function editPressed(data) {

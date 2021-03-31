@@ -4,10 +4,10 @@ const URL = 'https://5dd3d5ba8b5e080014dc4bfa.mockapi.io/contacts/'
 export function getContacts() {
     return axios.get(URL)
 }
-export function deleteOne(id) {
-    return axios.delete(URL + id, {
+export function deleteOne(contactID) {
+    return axios.delete(URL + contactID, {
         data: {
-            id: id
+            id: contactID
         }
     })
 }
