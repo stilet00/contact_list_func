@@ -3,6 +3,7 @@ import ContactList from "../ContactList/ContactList";
 import Form from "../Form/Form";
 import {useContacts} from "./hooks";
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 
@@ -36,6 +37,7 @@ export default function Contacts(props) {
     return (
                 <div className={'container'}>
                         {page}
+                    <Link to="/">Back</Link>
                 </div>
     );
 }

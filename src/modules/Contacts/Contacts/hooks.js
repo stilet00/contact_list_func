@@ -1,5 +1,5 @@
     import {useEffect, useState, useCallback} from "react";
-import {addOne, deleteOne, editOne, getContacts} from "../../services/asyncContacts";
+import {addOne, deleteOne, editOne, getContacts} from "../../../services/asyncContacts";
 
 
 export function useContacts() {

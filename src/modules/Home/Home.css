@@ -1,0 +1,16 @@
+ul li {
+    display: inline;
+    margin-right: 10px;
+}
+.blue-container {
+    display: flex;
+    justify-content: space-evenly;
+
+
+    padding: 20px;
+
+    box-sizing: border-box;
+    box-shadow: 2px 2px 2px #5a6e7e;
+    background: #cfe8fc;
+
+}

@@ -10,8 +10,8 @@ function SingleContact( { contact, deleteCont, onEdit }) {
             <TableCell>{ contact.surname }</TableCell>
             <TableCell>{ contact.phone }</TableCell>
             <TableCell>
-                <Button variant="contained" onClick={() => deleteCont(contact.id) }>DELETE</Button>
-                <Button variant="contained" onClick={() => onEdit(contact)}>EDIT</Button>
+                <Button variant="contained" fullWidth={true} onClick={() => deleteCont(contact.id) }>DELETE</Button>
+                <Button variant="contained" fullWidth={true} onClick={() => onEdit(contact)}>EDIT</Button>
             </TableCell>
         </TableRow>
     );
