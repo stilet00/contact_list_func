@@ -1,4 +1,4 @@
-import {createContext, useState} from 'react'
+import { createContext, useState, useCallback } from 'react'
 
 export const THEMES = {
     white: {
@@ -10,28 +10,28 @@ export const THEMES = {
 
 }
 export let themeContext = createContext(null)
-export function useThemeContext() {
-    const [theme, setTheme] = useState(THEMES.white)
-    const [isLight, setIsLight] = useState( true);
 
-    function setWhiteTheme() {
+export function useThemeContext () {
+    const [theme, setTheme] = useState(THEMES.white)
+    const [isLight, setIsLight] = useState(true);
+
+    function setWhiteTheme () {
         setTheme(THEMES.white)
     }
-    function setBlackTheme() {
+
+    function setBlackTheme () {
         setTheme(THEMES.black)
     }
 
-    const handleChange = (value) => {
+    const handleChange = useCallback((value) => {
         if (isLight) {
             setIsLight(value)
             setBlackTheme()
-        }
-        else {
+        } else {
             setIsLight(value)
             setWhiteTheme()
-        }
-        ;
-    };
+        };
+    }, [isLight])
 
     const contextValue = {
         theme,

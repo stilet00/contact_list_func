@@ -1,4 +1,4 @@
-    import {useEffect, useState} from "react";
+    import {useEffect, useState, useCallback} from "react";
 import {addOne, deleteOne, editOne, getContacts} from "../../services/asyncContacts";
 
 
@@ -10,17 +10,18 @@ export function useContacts() {
         getContacts().then(contacts => setContacts(contacts.data))
     }, [])
 
-    function deleteContact(contactId) {
+    let deleteContact = useCallback((contactId) => {
         deleteOne(contactId)
             .then(res => {
             setContacts(contacts.filter(item => item.id !== res.data.id).reverse()
             )
         })
-    }
-    function editPressed(data) {
+    }, [contacts])
+    let editPressed = useCallback((data) => {
         setEditedContact(data)
         setFormShown(!formShown)
-    }
+    }, [formShown])
+
     function saveContact(contact) {
         if (!contact.id) {
             addOne(contact).then(res => {
