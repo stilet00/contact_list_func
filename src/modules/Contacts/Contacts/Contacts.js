@@ -1,26 +1,27 @@
 import "./Contacts.css";
 import ContactList from "../ContactList/ContactList";
 import Form from "../Form/Form";
-import { useContacts } from "./hooks";
+import {  useData } from "../../../common/hooks";
 import React from "react";
+import { CONTACTS_URL } from "../../../constants/constants";
 
 export default function Contacts(props) {
   const {
-    contacts,
-    editedContact,
-    deleteContact,
+    editedData,
+    data,
+    deleteData,
     cancelEditing,
-    editPressed,
     saveContact,
+    editPressed,
     saveToggleState,
     formShown,
-  } = useContacts();
+  } = useData(CONTACTS_URL);
   let page;
   if (!formShown) {
     page = (
       <ContactList
-        contacts={contacts}
-        deleteOne={deleteContact}
+        contacts={data}
+        deleteOne={deleteData}
         onEdit={editPressed}
         onAdd={saveToggleState}
       />
@@ -28,7 +29,7 @@ export default function Contacts(props) {
   } else {
     page = (
       <Form
-        givenContact={editedContact}
+        givenContact={editedData}
         savePressed={saveContact}
         cancelPressed={cancelEditing}
       />

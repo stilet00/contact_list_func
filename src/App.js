@@ -7,7 +7,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Dashboard from "./modules/dashboard/Dashboard";
 import Albums from "./modules/albums/Albums";
 import Users from "./modules/users/Users";
-import Typography from "@material-ui/core/Typography";
 
 const UserContext = themeContext;
 

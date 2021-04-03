@@ -1,7 +1,6 @@
 import "./Home.css";
 import React, { useContext } from "react";
-import { Route, Link } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
+import { Link } from "react-router-dom";
 import { themeContext } from "../../themes/theme-context";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { IOSSwitch } from "../../components/IOSSwitch/IOSSwitch";
@@ -25,16 +24,16 @@ function Home(props) {
         </FormGroup>
         <ul>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard" style={{color: theme.color}}>Dashboard</Link>
           </li>
           <li>
-            <Link to="/albums">Albums</Link>
+            <Link to="/albums" style={{color: theme.color}}>Albums</Link>
           </li>
           <li>
-            <Link to="/users">Users</Link>
+            <Link to="/users" style={{color: theme.color}}>Users</Link>
           </li>
           <li>
-            <Link to="/contacts">Contacts</Link>
+            <Link to="/contacts" style={{color: theme.color}}>Contacts</Link>
           </li>
         </ul>
       </nav>

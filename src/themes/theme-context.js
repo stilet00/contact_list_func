@@ -2,10 +2,11 @@ import { createContext, useState, useCallback } from "react";
 
 export const THEMES = {
   white: {
-    background: "white",
+    background: "#58c5ea",
   },
   black: {
-    background: "#e5e5e5",
+    background: "#4b6e7a",
+    color: 'white'
   },
 };
 export let themeContext = createContext(null);

@@ -32,6 +32,15 @@ function ContactList({ contacts, deleteOne, onEdit, onAdd }) {
         <TableHead>
           <TableRow>
             <TableCell align="left">
+              <Button variant="contained" color="primary">
+                <Link to="/" className={"button-inner"}>
+                  Back
+                </Link>
+              </Button>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell align="left">
               <b>Name</b>
             </TableCell>
             <TableCell align="left">
@@ -60,15 +69,6 @@ function ContactList({ contacts, deleteOne, onEdit, onAdd }) {
             <TableCell align="left">
               <Button variant="contained" color="primary" onClick={onAdd}>
                 Add contact
-              </Button>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left">
-              <Button variant="contained" color="primary">
-                <Link to="/" className={"button-inner"}>
-                  Back
-                </Link>
               </Button>
             </TableCell>
           </TableRow>

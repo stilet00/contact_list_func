@@ -1,22 +1,33 @@
-import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
-import Albums from "../albums/Albums";
-import Users from "../users/Users";
-import Home from "../Home/Home";
+import React, { useContext } from "react";
+import {  Link } from "react-router-dom";
+import { themeContext } from "../../themes/theme-context";
+import Button from "@material-ui/core/Button";
 
 function Dashboard(props) {
+    const { theme } = useContext(themeContext)
   return (
-    <div>
-      Dashboard
-      <Link to="/albums">Albums</Link>
-      <Link to="/users">Users</Link>
-      <Link to="/">Back</Link>
-      <Switch>
-        <Route path={"/albums"} component={Albums} />
-        <Route path={"/users"} component={Users} />
-        <Route path={"/"} exact component={Home} />
-      </Switch>
-    </div>
+      <div className="home-container" style={{background: theme.background}}>
+          <nav>
+              <ul>
+                  <li>
+                      <Link to="/albums" style={{color: theme.color}}>Albums</Link>
+                  </li>
+                  <li>
+                      <Link to="/users" style={{color: theme.color}}>Users</Link>
+                  </li>
+                  <li>
+                      <Link to="/contacts" style={{color: theme.color}}>Contacts</Link>
+                  </li>
+                  <li>
+                      <Button variant="contained" color="primary">
+                          <Link to="/" className={"button-inner"}>
+                              Back
+                          </Link>
+                      </Button>
+                  </li>
+              </ul>
+          </nav>
+      </div>
   );
 }
 

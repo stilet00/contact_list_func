@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./SingleUser.css";
+import { themeContext } from "../../../themes/theme-context";
 function SingleUser({ user }) {
+    const { theme } = useContext(themeContext)
   return (
-    <div class={"user-card"}>
+    <div className={"user-card"} style={theme}>
       <p>{user.name}</p>
       <p>{user.username}</p>
       <p>{user.email}</p>

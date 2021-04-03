@@ -5,7 +5,7 @@ import TableRow from "@material-ui/core/TableRow";
 
 function SingleContact({ contact, deleteCont, onEdit }) {
   return (
-    <TableRow id={contact.id}>
+    <TableRow>
       <TableCell>{contact.name}</TableCell>
       <TableCell>{contact.surname}</TableCell>
       <TableCell>{contact.phone}</TableCell>

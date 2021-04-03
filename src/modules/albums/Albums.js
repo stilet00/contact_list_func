@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Albums.css";
@@ -12,17 +12,46 @@ import Button from "@material-ui/core/Button";
 import TableContainer from "@material-ui/core/TableContainer";
 import { themeContext } from "../../themes/theme-context";
 import { makeStyles } from "@material-ui/core/styles";
-import { useAlbums } from "./hooks";
 import SingleAlbum from "./SingleAlbum/SingleAlbum";
+import { useData } from "../../common/hooks";
+import { ALBUMS_URL } from "../../constants/constants";
+import ContactList from "../Contacts/ContactList/ContactList";
+import Form from "../Contacts/Form/Form";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
 function Albums(props) {
-  const { albums } = useAlbums();
+  const { data } = useData(ALBUMS_URL);
   const { theme } = useContext(themeContext);
+  const [renderedItems, setRenderedItems] = useState(20)
   const classes = useStyles();
+
+  function showMore() {
+    if (data.length - renderedItems >= 20 ) {
+      setRenderedItems(renderedItems+20)
+    } else {
+      setRenderedItems(renderedItems+(data.length - renderedItems))
+    }
+  }
+  function showLess() {
+    setRenderedItems(20)
+  }
+  let button;
+  if (data.length !== renderedItems) {
+    button = (
+        <Button variant="contained" color="primary" onClick={showMore}>
+          Show more
+        </Button>
+    );
+  } else {
+    button = (
+        <Button variant="contained" color="primary" onClick={showLess}>
+          Back to first
+        </Button>
+    );
+  }
   return (
     <div className={"albums-container"}>
       <TableContainer component={Paper} style={theme}>
@@ -44,38 +73,28 @@ function Albums(props) {
             </TableRow>
             <TableRow>
               <TableCell align="left">
-                <b>Name</b>
+                <b>ID</b>
               </TableCell>
               <TableCell align="left">
-                <b>Surname</b>
-              </TableCell>
-              <TableCell align="left">
-                <b>Actions</b>
+                <b>Title</b>
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {albums.map((item) => {
+            {data.slice(0, renderedItems).map((item) => {
               return (
                 <SingleAlbum
-                  // deleteCont={deleteOne}
                   album={item}
-                  // onEdit={onEdit}
                   key={item.id}
                 />
               );
             })}
             <TableRow>
-              <TableCell align="left">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  // onClick={onAdd}
-                >
-                  Add contact
-                </Button>
+              <TableCell>
+                {button}
               </TableCell>
             </TableRow>
+
           </TableBody>
         </Table>
       </TableContainer>
