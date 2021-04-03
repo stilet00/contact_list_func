@@ -1,17 +1,32 @@
-import React from 'react';
-import { Link, Route, Switch } from "react-router-dom";
-import Home from "../Home/Home";
-
-function Users (props) {
-    return (
-        <div>
-            Users
-            <Switch>
-                <Link to="/">Back</Link>
-                <Route path={'/'} component={Home} />
-            </Switch>
-        </div>
-    );
+import React from "react";
+import { Link } from "react-router-dom";
+import { useUsers } from "./hooks";
+import "./Users.css";
+import Button from "@material-ui/core/Button";
+import SingleUser from "./SingleUser/SingleUser";
+function Users(props) {
+  const { users } = useUsers();
+  return (
+    <>
+      <Button variant="contained" color="primary">
+        <Link to="/" className={"button-inner"}>
+          Back
+        </Link>
+      </Button>
+      <div className={"users-container"}>
+        {users.map((item) => {
+          return (
+            <SingleUser
+              // deleteCont={deleteOne}
+              user={item}
+              // onEdit={onEdit}
+              key={item.id}
+            />
+          );
+        })}
+      </div>
+    </>
+  );
 }
 
 export default Users;

@@ -1,28 +1,28 @@
-const axios = require('axios')
-const URL = 'https://5dd3d5ba8b5e080014dc4bfa.mockapi.io/contacts/'
+const axios = require("axios");
+const URL = "https://5dd3d5ba8b5e080014dc4bfa.mockapi.io/contacts/";
 
 export function getContacts() {
-    return axios.get(URL)
+  return axios.get(URL);
 }
 export function deleteOne(contactID) {
-    return axios.delete(URL + contactID, {
-        data: {
-            id: contactID
-        }
-    })
+  return axios.delete(URL + contactID, {
+    data: {
+      id: contactID,
+    },
+  });
 }
 export function addOne(data) {
-    return axios.post(URL, {
-        name: data.name,
-        surname: data.surname,
-        phone: data.phone
-    })
+  return axios.post(URL, {
+    name: data.name,
+    surname: data.surname,
+    phone: data.phone,
+  });
 }
 export function editOne(data) {
-    return axios.put(URL + data.id, {
-        id: data.id,
-        name: data.name,
-        surname: data.surname,
-        phone: data.phone
-    })
+  return axios.put(URL + data.id, {
+    id: data.id,
+    name: data.name,
+    surname: data.surname,
+    phone: data.phone,
+  });
 }

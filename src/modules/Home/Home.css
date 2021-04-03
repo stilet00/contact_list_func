@@ -1,16 +1,14 @@
-ul li {
-    display: inline;
-    margin-right: 10px;
+.home-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 2px #5a6e7e;
 }
-.blue-container {
-    display: flex;
-    justify-content: space-evenly;
-
-
-    padding: 20px;
-
-    box-sizing: border-box;
-    box-shadow: 2px 2px 2px #5a6e7e;
-    background: #cfe8fc;
-
+nav {
+  display: flex;
+}
+ul li {
+  display: inline;
+  margin-right: 20px;
 }

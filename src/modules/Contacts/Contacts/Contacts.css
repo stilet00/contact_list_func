@@ -1,8 +1,5 @@
-.container {
-    width: 100%;
-    margin: 50px auto;
-
-    padding: 10px;
-
-
+.contacts-container {
+  width: 70%;
+  margin: 50px auto;
+  padding: 10px;
 }

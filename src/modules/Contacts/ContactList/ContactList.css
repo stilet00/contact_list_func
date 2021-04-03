@@ -1,3 +1,6 @@
-.makeStyles-table-11 {
-    min-width: 100px!important;
+.button-inner {
+  text-decoration: none;
+}
+.button-inner:visited {
+  color: white;
 }
