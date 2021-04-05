@@ -9,20 +9,15 @@ import { useData } from "../../common/hooks";
 function Users(props) {
   const { data } = useData(USERS_URL);
   return (
-    <div className={'users'}>
-      <Button variant="contained" color="primary" className={'back-button'}>
+    <div className={"users"}>
+      <Button variant="contained" color="primary" className={"back-button"}>
         <Link to="/" className={"button-inner"}>
           Back
         </Link>
       </Button>
       <div className={"users-container"}>
         {data.map((item) => {
-          return (
-            <SingleUser
-              user={item}
-              key={item.id}
-            />
-          );
+          return <SingleUser user={item} key={item.id} />;
         })}
       </div>
     </div>

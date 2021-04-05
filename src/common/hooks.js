@@ -1,12 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import {
-  add,
-  remove,
-  edit,
-  get,
-} from "../services/asyncData";
-
-
+import { add, remove, edit, get } from "../services/asyncData";
 
 export function useData(url) {
   const [data, setData] = useState([]);
@@ -19,9 +12,7 @@ export function useData(url) {
   let deleteData = useCallback(
     (dataId) => {
       remove(dataId, url).then((res) => {
-        setData(
-            data.filter((item) => item.id !== res.data.id)
-        );
+        setData(data.filter((item) => item.id !== res.data.id));
       });
     },
     [data, url]

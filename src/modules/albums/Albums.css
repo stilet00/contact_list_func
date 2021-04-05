@@ -1,7 +1,7 @@
 .albums-container {
   width: 70%;
+  max-height: 90vh;
   margin: 50px auto;
   padding: 10px;
+  overflow: scroll;
 }
-
-

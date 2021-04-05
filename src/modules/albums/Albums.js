@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./Albums.css";
@@ -15,8 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import SingleAlbum from "./SingleAlbum/SingleAlbum";
 import { useData } from "../../common/hooks";
 import { ALBUMS_URL } from "../../constants/constants";
-import ContactList from "../Contacts/ContactList/ContactList";
-import Form from "../Contacts/Form/Form";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -25,31 +23,31 @@ const useStyles = makeStyles({
 function Albums(props) {
   const { data } = useData(ALBUMS_URL);
   const { theme } = useContext(themeContext);
-  const [renderedItems, setRenderedItems] = useState(20)
+  const [renderedItems, setRenderedItems] = useState(20);
   const classes = useStyles();
 
   function showMore() {
-    if (data.length - renderedItems >= 20 ) {
-      setRenderedItems(renderedItems+20)
+    if (data.length - renderedItems >= 20) {
+      setRenderedItems(renderedItems + 20);
     } else {
-      setRenderedItems(renderedItems+(data.length - renderedItems))
+      setRenderedItems(renderedItems + (data.length - renderedItems));
     }
   }
   function showLess() {
-    setRenderedItems(20)
+    setRenderedItems(20);
   }
   let button;
   if (data.length !== renderedItems) {
     button = (
-        <Button variant="contained" color="primary" onClick={showMore}>
-          Show more
-        </Button>
+      <Button variant="contained" color="primary" onClick={showMore}>
+        Show more
+      </Button>
     );
   } else {
     button = (
-        <Button variant="contained" color="primary" onClick={showLess}>
-          Back to first
-        </Button>
+      <Button variant="contained" color="primary" onClick={showLess}>
+        Back to first
+      </Button>
     );
   }
   return (
@@ -63,13 +61,13 @@ function Albums(props) {
         >
           <TableHead>
             <TableRow>
-              <TableCell align="left">
+              <td>
                 <Button variant="contained" color="primary">
                   <Link to="/" className={"button-inner"}>
                     Back
                   </Link>
                 </Button>
-              </TableCell>
+              </td>
             </TableRow>
             <TableRow>
               <TableCell align="left">
@@ -82,19 +80,11 @@ function Albums(props) {
           </TableHead>
           <TableBody>
             {data.slice(0, renderedItems).map((item) => {
-              return (
-                <SingleAlbum
-                  album={item}
-                  key={item.id}
-                />
-              );
+              return <SingleAlbum album={item} key={item.id} />;
             })}
             <TableRow>
-              <TableCell>
-                {button}
-              </TableCell>
+              <td>{button}</td>
             </TableRow>
-
           </TableBody>
         </Table>
       </TableContainer>

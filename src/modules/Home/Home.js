@@ -24,16 +24,24 @@ function Home(props) {
         </FormGroup>
         <ul>
           <li>
-            <Link to="/dashboard" style={{color: theme.color}}>Dashboard</Link>
+            <Link to="/dashboard" style={{ color: theme.color }}>
+              Dashboard
+            </Link>
           </li>
           <li>
-            <Link to="/albums" style={{color: theme.color}}>Albums</Link>
+            <Link to="/albums" style={{ color: theme.color }}>
+              Albums
+            </Link>
           </li>
           <li>
-            <Link to="/users" style={{color: theme.color}}>Users</Link>
+            <Link to="/users" style={{ color: theme.color }}>
+              Users
+            </Link>
           </li>
           <li>
-            <Link to="/contacts" style={{color: theme.color}}>Contacts</Link>
+            <Link to="/contacts" style={{ color: theme.color }}>
+              Contacts
+            </Link>
           </li>
         </ul>
       </nav>

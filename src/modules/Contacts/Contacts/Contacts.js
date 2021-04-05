@@ -1,7 +1,7 @@
 import "./Contacts.css";
 import ContactList from "../ContactList/ContactList";
 import Form from "../Form/Form";
-import {  useData } from "../../../common/hooks";
+import { useData } from "../../../common/hooks";
 import React from "react";
 import { CONTACTS_URL } from "../../../constants/constants";
 

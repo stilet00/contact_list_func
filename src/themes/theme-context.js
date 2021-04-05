@@ -6,7 +6,7 @@ export const THEMES = {
   },
   black: {
     background: "#4b6e7a",
-    color: 'white'
+    color: "white",
   },
 };
 export let themeContext = createContext(null);
