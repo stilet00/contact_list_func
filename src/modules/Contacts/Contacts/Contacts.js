@@ -15,6 +15,7 @@ export default function Contacts(props) {
     editPressed,
     saveToggleState,
     formShown,
+    loader,
   } = useData(CONTACTS_URL);
   let page;
   if (!formShown) {
@@ -24,6 +25,7 @@ export default function Contacts(props) {
         deleteOne={deleteData}
         onEdit={editPressed}
         onAdd={saveToggleState}
+        Loader={loader}
       />
     );
   } else {

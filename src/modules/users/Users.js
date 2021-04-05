@@ -7,7 +7,7 @@ import { USERS_URL } from "../../constants/constants";
 import { useData } from "../../common/hooks";
 
 function Users(props) {
-  const { data } = useData(USERS_URL);
+  const { data, loader } = useData(USERS_URL);
   return (
     <div className={"users"}>
       <Button variant="contained" color="primary" className={"back-button"}>
@@ -16,6 +16,11 @@ function Users(props) {
         </Link>
       </Button>
       <div className={"users-container"}>
+          <table>
+              <tbody>
+              {loader}
+              </tbody>
+          </table>
         {data.map((item) => {
           return <SingleUser user={item} key={item.id} />;
         })}

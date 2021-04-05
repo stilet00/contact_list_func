@@ -1,12 +1,25 @@
 import { useEffect, useState, useCallback } from "react";
 import { add, remove, edit, get } from "../services/asyncData";
+import Loader from "../components/Loader/Loader";
 
 export function useData(url) {
   const [data, setData] = useState([]);
   const [editedData, setEditedData] = useState(null);
   const [formShown, setFormShown] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  let loader;
+  if (loading) {
+    loader = <Loader />;
+  } else {
+    loader = null;
+  }
   useEffect(() => {
-    get(url).then((data) => setData(data.data));
+    setLoading(true);
+    get(url).then((data) => {
+      setData(data.data);
+      setLoading(false);
+    });
   }, [url]);
 
   let deleteData = useCallback(
@@ -61,5 +74,6 @@ export function useData(url) {
     saveToggleState,
     formShown,
     setFormShown,
+    loader,
   };
 }

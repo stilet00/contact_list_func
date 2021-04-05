@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 function Albums(props) {
-  const { data } = useData(ALBUMS_URL);
+  const { data, loader } = useData(ALBUMS_URL);
   const { theme } = useContext(themeContext);
   const [renderedItems, setRenderedItems] = useState(20);
   const classes = useStyles();
@@ -79,6 +79,7 @@ function Albums(props) {
             </TableRow>
           </TableHead>
           <TableBody>
+            {loader}
             {data.slice(0, renderedItems).map((item) => {
               return <SingleAlbum album={item} key={item.id} />;
             })}
