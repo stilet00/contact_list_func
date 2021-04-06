@@ -3,7 +3,7 @@ import { add, remove, edit, get } from "../services/asyncData";
 
 export function useData(url) {
   const [data, setData] = useState([]);
-  const [formShown, setFormShown] = useState(false);
+
   useEffect(() => {
     get(url).then((data) => setData(data.data));
   }, [url]);
@@ -20,34 +20,22 @@ export function useData(url) {
   function saveData(item) {
     if (!item.id) {
       add(item, url).then((res) => {
-        setFormShown(!formShown);
         setData([...data, res.data]);
       });
     } else {
       edit(item, url).then((res) => {
-        setFormShown(!formShown);
         setData(
           data.map((item) => (item.id === res.data.id ? res.data : item))
         );
       });
     }
   }
-  function cancelEditing() {
-    setFormShown(!formShown);
-  }
-  function saveToggleState() {
-    setFormShown(!formShown);
-    setFormShown(!formShown);
-  }
+
   return {
     data,
     setData,
     deleteData,
-    cancelEditing,
     saveData,
-    saveToggleState,
-    formShown,
-    setFormShown,
   };
 }
 

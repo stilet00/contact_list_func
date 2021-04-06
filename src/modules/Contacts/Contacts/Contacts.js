@@ -2,34 +2,30 @@ import "./Contacts.css";
 import ContactList from "../ContactList/ContactList";
 import Form from "../Form/Form";
 import { useData } from "../../../common/hooks";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { CONTACTS_URL } from "../../../constants/constants";
+import { useEditor, useTogglePages } from "./hooks";
 
 export default function Contacts(props) {
-  const [editedData, setEditedData] = useState(null);
   const {
-    data,
-    deleteData,
-    cancelEditing,
-    saveData,
-    saveToggleState,
     formShown,
     setFormShown,
-  } = useData(CONTACTS_URL);
-  let editPressed = useCallback(
-    (data) => {
-      setEditedData(data);
-      setFormShown(!formShown);
-    },
-    [formShown, setFormShown]
-  );
+    saveToggleState,
+    hideForm,
+  } = useTogglePages();
+  const { editPressed, editedData, setEditedData } = useEditor();
+  const { data, deleteData, saveData } = useData(CONTACTS_URL);
+
   let page;
   if (!formShown) {
     page = (
       <ContactList
         contacts={data}
         deleteOne={deleteData}
-        onEdit={editPressed}
+        onEdit={(data) => {
+          editPressed(data);
+          setFormShown(!formShown);
+        }}
         onAdd={saveToggleState}
       />
     );
@@ -38,11 +34,12 @@ export default function Contacts(props) {
       <Form
         givenContact={editedData}
         savePressed={(contact) => {
+          setFormShown(!formShown);
           saveData(contact);
           setEditedData(null);
         }}
         cancelPressed={() => {
-          cancelEditing();
+          hideForm();
           setEditedData(null);
         }}
       />
