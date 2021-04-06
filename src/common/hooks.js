@@ -60,12 +60,12 @@ export function useShowMore(data) {
       setRenderedItems(renderedItems + (data.length - renderedItems));
     }
   }
-  function showLess() {
+  function backToMinimal() {
     setRenderedItems(20);
   }
   return {
     renderedItems,
     showMore,
-    showLess,
+    backToMinimal,
   };
 }

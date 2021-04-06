@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 function Albums(props) {
   const { data } = useData(ALBUMS_URL);
   const { theme } = useContext(themeContext);
-  const { renderedItems, showLess, showMore } = useShowMore(data);
+  const { renderedItems, backToMinimal, showMore } = useShowMore(data);
   const classes = useStyles();
 
   let button;
@@ -35,8 +35,8 @@ function Albums(props) {
     );
   } else {
     button = (
-      <Button variant="contained" color="primary" onClick={showLess}>
-        Back to first
+      <Button variant="contained" color="primary" onClick={backToMinimal}>
+        Minimize
       </Button>
     );
   }
