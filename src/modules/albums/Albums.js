@@ -13,7 +13,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import { themeContext } from "../../themes/theme-context";
 import { makeStyles } from "@material-ui/core/styles";
 import SingleAlbum from "./SingleAlbum/SingleAlbum";
-import { useData } from "../../common/hooks";
+import { useData, useShowMore } from "../../common/hooks";
 import { ALBUMS_URL } from "../../constants/constants";
 const useStyles = makeStyles({
   table: {
@@ -23,19 +23,9 @@ const useStyles = makeStyles({
 function Albums(props) {
   const { data } = useData(ALBUMS_URL);
   const { theme } = useContext(themeContext);
-  const [renderedItems, setRenderedItems] = useState(20);
+  const { renderedItems, showLess, showMore } = useShowMore(data);
   const classes = useStyles();
 
-  function showMore() {
-    if (data.length - renderedItems >= 20) {
-      setRenderedItems(renderedItems + 20);
-    } else {
-      setRenderedItems(renderedItems + (data.length - renderedItems));
-    }
-  }
-  function showLess() {
-    setRenderedItems(20);
-  }
   let button;
   if (data.length !== renderedItems) {
     button = (

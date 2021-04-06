@@ -3,7 +3,6 @@ import { add, remove, edit, get } from "../services/asyncData";
 
 export function useData(url) {
   const [data, setData] = useState([]);
-  const [editedData, setEditedData] = useState(null);
   const [formShown, setFormShown] = useState(false);
   useEffect(() => {
     get(url).then((data) => setData(data.data));
@@ -17,23 +16,15 @@ export function useData(url) {
     },
     [data, url]
   );
-  let editPressed = useCallback(
-    (data) => {
-      setEditedData(data);
-      setFormShown(!formShown);
-    },
-    [formShown]
-  );
 
-  function saveContact(contact) {
-    if (!contact.id) {
-      add(contact, url).then((res) => {
+  function saveData(item) {
+    if (!item.id) {
+      add(item, url).then((res) => {
         setFormShown(!formShown);
         setData([...data, res.data]);
       });
     } else {
-      edit(contact, url).then((res) => {
-        setEditedData(null);
+      edit(item, url).then((res) => {
         setFormShown(!formShown);
         setData(
           data.map((item) => (item.id === res.data.id ? res.data : item))
@@ -43,23 +34,38 @@ export function useData(url) {
   }
   function cancelEditing() {
     setFormShown(!formShown);
-    setEditedData(null);
   }
   function saveToggleState() {
     setFormShown(!formShown);
     setFormShown(!formShown);
   }
   return {
-    editedData,
-    setEditedData,
     data,
     setData,
     deleteData,
     cancelEditing,
-    saveContact,
-    editPressed,
+    saveData,
     saveToggleState,
     formShown,
     setFormShown,
+  };
+}
+
+export function useShowMore(data) {
+  const [renderedItems, setRenderedItems] = useState(20);
+  function showMore() {
+    if (data.length - renderedItems >= 20) {
+      setRenderedItems(renderedItems + 20);
+    } else {
+      setRenderedItems(renderedItems + (data.length - renderedItems));
+    }
+  }
+  function showLess() {
+    setRenderedItems(20);
+  }
+  return {
+    renderedItems,
+    showMore,
+    showLess,
   };
 }
