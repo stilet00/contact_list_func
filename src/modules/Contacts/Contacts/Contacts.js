@@ -21,7 +21,7 @@ export default function Contacts(props) {
       setEditedData(data);
       setFormShown(!formShown);
     },
-    [formShown]
+    [formShown, setFormShown]
   );
   let page;
   if (!formShown) {
@@ -37,8 +37,8 @@ export default function Contacts(props) {
     page = (
       <Form
         givenContact={editedData}
-        savePressed={() => {
-          saveData();
+        savePressed={(contact) => {
+          saveData(contact);
           setEditedData(null);
         }}
         cancelPressed={() => {

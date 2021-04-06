@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import "./Albums.css";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
