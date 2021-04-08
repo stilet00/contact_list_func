@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ContactList({ contacts, deleteOne, onEdit, onAdd }) {
+function ContactList({ contacts, deleteOne, onEdit, onAdd, loader }) {
   const { theme } = useContext(themeContext);
   const classes = useStyles();
   return (
@@ -37,6 +37,11 @@ function ContactList({ contacts, deleteOne, onEdit, onAdd }) {
                   Back
                 </Link>
               </Button>
+            </td>
+          </TableRow>
+          <TableRow>
+            <td>
+              {loader}
             </td>
           </TableRow>
           <TableRow>

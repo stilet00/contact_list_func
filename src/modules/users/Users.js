@@ -4,10 +4,11 @@ import "./Users.css";
 import Button from "@material-ui/core/Button";
 import SingleUser from "./SingleUser/SingleUser";
 import { USERS_URL } from "../../constants/constants";
-import { useData } from "../../common/hooks";
+import { useData, useShowMore } from "../../common/hooks";
 
 function Users(props) {
-  const { data } = useData(USERS_URL);
+  const { data, loader } = useData(USERS_URL);
+  const { renderedItems, button } = useShowMore(data);
   return (
     <div className={"users"}>
       <Button variant="contained" color="primary" className={"back-button"}>
@@ -16,10 +17,12 @@ function Users(props) {
         </Link>
       </Button>
       <div className={"users-container"}>
-        {data.map((item) => {
+          {loader}
+        {data.slice(0, renderedItems).map((item) => {
           return <SingleUser user={item} key={item.id} />;
         })}
       </div>
+        {button}
     </div>
   );
 }

@@ -6,10 +6,8 @@ function SingleUser({ user }) {
   return (
     <div className={"user-card"} style={theme}>
       <p>{user.name}</p>
-      <p>{user.username}</p>
       <p>{user.email}</p>
       <p>{user.phone}</p>
-      <p>{user.website}</p>
     </div>
   );
 }

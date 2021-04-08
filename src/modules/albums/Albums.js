@@ -20,25 +20,12 @@ const useStyles = makeStyles({
   },
 });
 function Albums(props) {
-  const { data } = useData(ALBUMS_URL);
+  const { data, loader } = useData(ALBUMS_URL);
   const { theme } = useContext(themeContext);
-  const { renderedItems, backToMinimal, showMore } = useShowMore(data);
+  const { renderedItems, button } = useShowMore(data);
   const classes = useStyles();
 
-  let button;
-  if (data.length !== renderedItems) {
-    button = (
-      <Button variant="contained" color="primary" onClick={showMore}>
-        Show more
-      </Button>
-    );
-  } else {
-    button = (
-      <Button variant="contained" color="primary" onClick={backToMinimal}>
-        Minimize
-      </Button>
-    );
-  }
+
   return (
     <div className={"albums-container"}>
       <TableContainer component={Paper} style={theme}>
@@ -56,6 +43,11 @@ function Albums(props) {
                     Back
                   </Link>
                 </Button>
+              </td>
+            </TableRow>
+            <TableRow>
+              <td>
+                {loader}
               </td>
             </TableRow>
             <TableRow>

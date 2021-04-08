@@ -14,7 +14,7 @@ export default function Contacts(props) {
     hideForm,
   } = useTogglePages();
   const { editPressed, editedData, setEditedData } = useEditor();
-  const { data, deleteData, saveData } = useData(CONTACTS_URL);
+  const { data, deleteData, saveData, loader } = useData(CONTACTS_URL);
 
   let page;
   if (!formShown) {
@@ -22,6 +22,7 @@ export default function Contacts(props) {
       <ContactList
         contacts={data}
         deleteOne={deleteData}
+        loader={loader}
         onEdit={(data) => {
           editPressed(data);
           setFormShown(!formShown);

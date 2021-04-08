@@ -1,12 +1,16 @@
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { add, remove, edit, get } from "../services/asyncData";
+import Button from "@material-ui/core/Button";
+import Loader from "../components/Loader/Loader";
 
 export function useData(url) {
   const [data, setData] = useState([]);
-
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
-    get(url).then((data) => setData(data.data));
+    get(url).then((data) => {setData(data.data); changeLoading()});
   }, [url]);
+  let loader;
+  loader = loading ? <Loader /> : null
 
   let deleteData = useCallback(
     (dataId) => {
@@ -16,7 +20,9 @@ export function useData(url) {
     },
     [data, url]
   );
-
+  function changeLoading() {
+    setLoading(!loading);
+  }
   function saveData(item) {
     if (!item.id) {
       add(item, url).then((res) => {
@@ -36,11 +42,26 @@ export function useData(url) {
     setData,
     deleteData,
     saveData,
+    loader
   };
 }
 
 export function useShowMore(data) {
-  const [renderedItems, setRenderedItems] = useState(20);
+  const [renderedItems, setRenderedItems] = useState(10);
+  let button;
+  if (data.length !== renderedItems) {
+    button = (
+        <Button variant="contained" color="primary" onClick={showMore}>
+          Show more
+        </Button>
+    );
+  } else {
+    button = (
+        <Button variant="contained" color="primary" onClick={backToMinimal}>
+          Minimize
+        </Button>
+    );
+  }
   function showMore() {
     if (data.length - renderedItems >= 20) {
       setRenderedItems(renderedItems + 20);
@@ -49,11 +70,12 @@ export function useShowMore(data) {
     }
   }
   function backToMinimal() {
-    setRenderedItems(20);
+    setRenderedItems(10);
   }
   return {
     renderedItems,
     showMore,
     backToMinimal,
+    button
   };
 }
