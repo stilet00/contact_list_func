@@ -1,29 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import "./Users.css";
+import UserList from "./UserList/UserList";
 import Button from "@material-ui/core/Button";
-import SingleUser from "./SingleUser/SingleUser";
-import { USERS_URL } from "../../constants/constants";
-import { useData, useShowMore } from "../../common/hooks";
+import UserForm from "./UserForm/UserForm";
 
 function Users(props) {
-  const { data, loader } = useData(USERS_URL);
-  const { renderedItems, button } = useShowMore(data);
+    const { path } = useRouteMatch()
   return (
-    <div className={"users"}>
-      <Button variant="contained" color="primary" className={"back-button"}>
-        <Link to="/" className={"button-inner"}>
-          Back
-        </Link>
-      </Button>
-      <div className={"users-container"}>
-          {loader}
-        {data.slice(0, renderedItems).map((item) => {
-          return <SingleUser user={item} key={item.id} />;
-        })}
+      <div className={"users"}>
+          <div className={'control-buttons'}>
+              <Button variant="contained" color="primary" >
+                  <Link to="/" className={"button-inner"}>
+                      HOME
+                  </Link>
+              </Button>
+          </div>
+      <Switch>
+            <Route path={path + '/'} exact component={UserList}/>
+            <Route path={path + '/:id'} component={UserForm}/>
+      </Switch>
       </div>
-        {button}
-    </div>
   );
 }
 

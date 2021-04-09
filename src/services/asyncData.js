@@ -25,3 +25,9 @@ export function edit(data, url) {
     phone: data.phone,
   });
 }
+
+// for users
+
+export function editUser(data, url) {
+  return axios.put(url, {...data})
+}

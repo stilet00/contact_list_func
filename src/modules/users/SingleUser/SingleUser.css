@@ -7,4 +7,12 @@
   border-radius: 10px;
   box-shadow: 2px 2px 2px #4f4d4d;
   opacity: 0.9;
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:visited {
+  color: inherit;
 }

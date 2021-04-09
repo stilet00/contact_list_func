@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function useForm(givenContact, savePressed) {
   const [contact, setContact] = useState(
-    givenContact || { name: "", surname: "", phone: "" }
+    givenContact || { name: "", phone: "", email: "" }
   );
 
   function saveCont(e) {

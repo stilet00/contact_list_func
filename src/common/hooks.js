@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { add, remove, edit, get } from "../services/asyncData";
+import { add, remove, edit, get, editUser } from "../services/asyncData";
 import Button from "@material-ui/core/Button";
 import Loader from "../components/Loader/Loader";
 
@@ -36,12 +36,16 @@ export function useData(url) {
       });
     }
   }
+  function saveUser(item) {
+    editUser(item, url)
+  }
 
   return {
     data,
     setData,
     deleteData,
     saveData,
+    saveUser,
     loader
   };
 }
@@ -63,8 +67,8 @@ export function useShowMore(data) {
     );
   }
   function showMore() {
-    if (data.length - renderedItems >= 20) {
-      setRenderedItems(renderedItems + 20);
+    if (data.length - renderedItems >= 10) {
+      setRenderedItems(renderedItems + 10);
     } else {
       setRenderedItems(renderedItems + (data.length - renderedItems));
     }

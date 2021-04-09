@@ -1,0 +1,19 @@
+.users {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 20px;
+}
+.back-button {
+    width: 6%;
+    margin-left: 50px !important;
+}
+
+.users-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 80vh;
+    overflow: scroll;
+    margin: 10px auto;
+}
