@@ -25,7 +25,6 @@ function Albums(props) {
   const { renderedItems, button } = useShowMore(data);
   const classes = useStyles();
 
-
   return (
     <div className={"albums-container"}>
       <TableContainer component={Paper} style={theme}>
@@ -46,9 +45,7 @@ function Albums(props) {
               </td>
             </TableRow>
             <TableRow>
-              <td>
-                {loader}
-              </td>
+              <td>{loader}</td>
             </TableRow>
             <TableRow>
               <TableCell align="left">

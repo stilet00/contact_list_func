@@ -5,45 +5,47 @@ import React, { useCallback, useEffect, useState } from "react";
 import FormFields from "../FormFields/FormFields";
 
 export function useForm() {
-
-    const { id } = useParams()
-    const { data, setData, saveUser, loader } = useData(USERS_URL + id)
-    const [form, setForm] = useState(null)
-    const history = useHistory()
-    let onInputChange = useCallback((e) => {
-        setData({ ...data, [e.target.name]: e.target.value.trim() });
-    }, [data, setData])
-    useEffect(() => {
-        if (!Array.isArray(data)) {
-            setForm(<FormFields data={data} onInputChange={onInputChange}/>)
-        }
-    }, [data, onInputChange]);
-
-
-    function save(e) {
-        if (checkFields()) {
-            e.preventDefault();
-            saveUser(data)
-            setTimeout(() => {
-                history.push('/users/')
-            }, 500)
-
-        } else {
-            e.preventDefault();
-            alert("Something is wrong!");
-        }
+  const { id } = useParams();
+  const { data, setData, saveUser, loader } = useData(USERS_URL + id);
+  const [form, setForm] = useState(null);
+  const history = useHistory();
+  let onInputChange = useCallback(
+    (e) => {
+      setData({ ...data, [e.target.name]: e.target.value.trim() });
+    },
+    [data, setData]
+  );
+  useEffect(() => {
+    if (!Array.isArray(data)) {
+      setForm(<FormFields data={data} onInputChange={onInputChange} />);
     }
+  }, [data, onInputChange]);
 
-    function checkFields() {
-        let nameRegExp = /[a-zA-Z\d]/gm;
-        let emailRegExp = /^\S+@\S+\.\S+$/g
-        return nameRegExp.test(data.name) && data.phone && emailRegExp.test(data.email)
+  function save(e) {
+    if (checkFields()) {
+      e.preventDefault();
+      saveUser(data);
+      setTimeout(() => {
+        history.push("/users/");
+      }, 500);
+    } else {
+      e.preventDefault();
+      alert("Something is wrong!");
     }
-    return {
-        onInputChange,
-        save,
-        data,
-        loader,
-        form,
-    }
+  }
+
+  function checkFields() {
+    let nameRegExp = /[a-zA-Z\d]/gm;
+    let emailRegExp = /^\S+@\S+\.\S+$/g;
+    return (
+      nameRegExp.test(data.name) && data.phone && emailRegExp.test(data.email)
+    );
+  }
+  return {
+    onInputChange,
+    save,
+    data,
+    loader,
+    form,
+  };
 }

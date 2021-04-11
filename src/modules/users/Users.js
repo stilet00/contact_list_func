@@ -6,22 +6,22 @@ import Button from "@material-ui/core/Button";
 import UserForm from "./UserForm/UserForm";
 
 function Users(props) {
-  const { path } = useRouteMatch()
+  const { path } = useRouteMatch();
   return (
-      <div className={"users"}>
-          <div className={'control-buttons'}>
-              <Button variant="contained" color="primary" >
-                  <Link to="/" className={"button-inner"}>
-                      HOME
-                  </Link>
-              </Button>
-          </div>
-      <Switch>
-            <Route path={path + '/'} exact component={UserList}/>
-            <Route path={path + '/:id'} component={UserForm}/>
-            <Route path={path + '/form'} component={UserForm}/>
-      </Switch>
+    <div className={"users"}>
+      <div className={"control-buttons"}>
+        <Button variant="contained" color="primary">
+          <Link to="/" className={"button-inner"}>
+            HOME
+          </Link>
+        </Button>
       </div>
+      <Switch>
+        <Route path={path + "/"} exact component={UserList} />
+        <Route path={path + "/:id"} component={UserForm} />
+        <Route path={path + "/form"} component={UserForm} />
+      </Switch>
+    </div>
   );
 }
 

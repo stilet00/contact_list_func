@@ -1,17 +1,27 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { add, remove, edit, get, editUser, addUser } from "../services/asyncData";
+import {
+  add,
+  remove,
+  edit,
+  get,
+  editUser,
+  addUser,
+} from "../services/asyncData";
 import Button from "@material-ui/core/Button";
 import Loader from "../components/Loader/Loader";
 import { USER } from "../constants/constants";
 
 export function useData(url) {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    get(url).then((data) => {setData(data.data); changeLoading()});
+    get(url).then((data) => {
+      setData(data.data);
+      changeLoading();
+    });
   }, [url]);
   let loader;
-  loader = loading ? <Loader /> : null
+  loader = loading ? <Loader /> : null;
 
   let deleteData = useCallback(
     (dataId) => {
@@ -38,16 +48,16 @@ export function useData(url) {
     }
   }
   function saveUser(item) {
-    setLoading(true)
-    editUser(item, url).then(res => setLoading(false))
+    setLoading(true);
+    editUser(item, url).then((res) => setLoading(false));
   }
 
   function newUser() {
-    setLoading(true)
+    setLoading(true);
     addUser(USER, url).then((res) => {
       setData([...data, res.data]);
       changeLoading();
-    })
+    });
   }
 
   return {
@@ -57,7 +67,7 @@ export function useData(url) {
     saveData,
     saveUser,
     newUser,
-    loader
+    loader,
   };
 }
 
@@ -66,15 +76,15 @@ export function useShowMore(data) {
   let button;
   if (data.length !== renderedItems) {
     button = (
-        <Button variant="contained" color="primary" onClick={showMore}>
-          Show more
-        </Button>
+      <Button variant="contained" color="primary" onClick={showMore}>
+        Show more
+      </Button>
     );
   } else {
     button = (
-        <Button variant="contained" color="primary" onClick={backToMinimal}>
-          Minimize
-        </Button>
+      <Button variant="contained" color="primary" onClick={backToMinimal}>
+        Minimize
+      </Button>
     );
   }
   function showMore() {
@@ -91,6 +101,6 @@ export function useShowMore(data) {
     renderedItems,
     showMore,
     backToMinimal,
-    button
+    button,
   };
 }

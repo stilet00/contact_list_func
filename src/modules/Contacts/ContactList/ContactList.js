@@ -40,9 +40,7 @@ function ContactList({ contacts, deleteOne, onEdit, onAdd, loader }) {
             </td>
           </TableRow>
           <TableRow>
-            <td>
-              {loader}
-            </td>
+            <td>{loader}</td>
           </TableRow>
           <TableRow>
             <TableCell align="left">

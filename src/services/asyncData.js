@@ -29,8 +29,8 @@ export function edit(data, url) {
 // for users
 
 export function editUser(data, url) {
-  return axios.put(url, {...data})
+  return axios.put(url, { ...data });
 }
 export function addUser(data, url) {
-  return axios.post(url, {...data})
+  return axios.post(url, { ...data });
 }
