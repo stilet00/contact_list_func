@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { add, remove, edit, get, editUser } from "../services/asyncData";
+import { add, remove, edit, get, editUser, addUser } from "../services/asyncData";
 import Button from "@material-ui/core/Button";
 import Loader from "../components/Loader/Loader";
+import { USER } from "../constants/constants";
 
 export function useData(url) {
   const [data, setData] = useState([]);
@@ -21,7 +22,7 @@ export function useData(url) {
     [data, url]
   );
   function changeLoading() {
-    setLoading(!loading);
+    setLoading(false);
   }
   function saveData(item) {
     if (!item.id) {
@@ -37,7 +38,16 @@ export function useData(url) {
     }
   }
   function saveUser(item) {
-    editUser(item, url)
+    setLoading(true)
+    editUser(item, url).then(res => setLoading(false))
+  }
+
+  function newUser() {
+    setLoading(true)
+    addUser(USER, url).then((res) => {
+      setData([...data, res.data]);
+      changeLoading();
+    })
   }
 
   return {
@@ -46,6 +56,7 @@ export function useData(url) {
     deleteData,
     saveData,
     saveUser,
+    newUser,
     loader
   };
 }

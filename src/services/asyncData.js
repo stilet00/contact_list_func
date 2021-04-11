@@ -31,3 +31,6 @@ export function edit(data, url) {
 export function editUser(data, url) {
   return axios.put(url, {...data})
 }
+export function addUser(data, url) {
+  return axios.post(url, {...data})
+}
