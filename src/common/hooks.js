@@ -73,20 +73,7 @@ export function useData(url) {
 
 export function useShowMore(data) {
   const [renderedItems, setRenderedItems] = useState(10);
-  let button;
-  if (data.length !== renderedItems) {
-    button = (
-      <Button variant="contained" color="primary" onClick={showMore}>
-        Show more
-      </Button>
-    );
-  } else {
-    button = (
-      <Button variant="contained" color="primary" onClick={backToMinimal}>
-        Minimize
-      </Button>
-    );
-  }
+
   function showMore() {
     if (data.length - renderedItems >= 10) {
       setRenderedItems(renderedItems + 10);
@@ -100,7 +87,6 @@ export function useShowMore(data) {
   return {
     renderedItems,
     showMore,
-    backToMinimal,
-    button,
+    backToMinimal
   };
 }

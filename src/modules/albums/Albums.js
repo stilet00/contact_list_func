@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SingleAlbum from "./SingleAlbum/SingleAlbum";
 import { useData, useShowMore } from "../../common/hooks";
 import { ALBUMS_URL } from "../../constants/constants";
+import ShowMore from "../../components/ShowMore/ShowMore";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
 function Albums(props) {
   const { data, loader } = useData(ALBUMS_URL);
   const { theme } = useContext(themeContext);
-  const { renderedItems, button } = useShowMore(data);
+  const { renderedItems, showMore, backToMinimal } = useShowMore(data);
   const classes = useStyles();
 
   return (
@@ -61,7 +62,7 @@ function Albums(props) {
               return <SingleAlbum album={item} key={item.id} />;
             })}
             <TableRow>
-              <td>{button}</td>
+              <td><ShowMore data={data} showMore={showMore} backToMinimal={backToMinimal} renderedItems={renderedItems}/></td>
             </TableRow>
           </TableBody>
         </Table>
