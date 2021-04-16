@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   add,
   remove,
@@ -7,8 +7,6 @@ import {
   editUser,
   addUser,
 } from "../services/asyncData";
-import Button from "@material-ui/core/Button";
-import Loader from "../components/Loader/Loader";
 import { USER } from "../constants/constants";
 
 export function useData(url) {
@@ -20,8 +18,6 @@ export function useData(url) {
       changeLoading();
     });
   }, [url]);
-  let loader;
-  loader = loading ? <Loader /> : null;
 
   let deleteData = useCallback(
     (dataId) => {
@@ -48,8 +44,7 @@ export function useData(url) {
     }
   }
   function saveUser(item) {
-    setLoading(true);
-    editUser(item, url).then((res) => setLoading(false));
+    return editUser(item, url);
   }
 
   function newUser() {
@@ -67,7 +62,7 @@ export function useData(url) {
     saveData,
     saveUser,
     newUser,
-    loader,
+    loading,
   };
 }
 
@@ -87,6 +82,6 @@ export function useShowMore(data) {
   return {
     renderedItems,
     showMore,
-    backToMinimal
+    backToMinimal,
   };
 }

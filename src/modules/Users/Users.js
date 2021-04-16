@@ -19,7 +19,6 @@ function Users(props) {
       <Switch>
         <Route path={path + "/"} exact component={UserList} />
         <Route path={path + "/:id"} component={UserForm} />
-        <Route path={path + "/form"} component={UserForm} />
       </Switch>
     </div>
   );

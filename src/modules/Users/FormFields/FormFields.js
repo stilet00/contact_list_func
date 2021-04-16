@@ -30,7 +30,7 @@ function FormFields({ data, onInputChange }) {
         Save
       </Button>
       <Button variant="contained" type={"button"}>
-        <Link to={"/users"} className={"button-inner"}>
+        <Link to={"/Users"} className={"button-inner"}>
           Back
         </Link>
       </Button>

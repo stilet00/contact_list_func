@@ -1,11 +1,10 @@
 import React from "react";
-import { useForm } from "./hooks";
+import { useEditUser } from "./hooks";
 
 function UserForm() {
-  const { save, loader, form } = useForm();
+  const { save, form } = useEditUser();
   return (
     <form action="" onSubmit={save}>
-      {loader}
       {form}
     </form>
   );

@@ -4,9 +4,9 @@ import Contacts from "./modules/Contacts/Contacts/Contacts";
 import { themeContext, useThemeContext } from "./themes/theme-context";
 import Home from "./modules/Home/Home";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Dashboard from "./modules/dashboard/Dashboard";
-import Albums from "./modules/albums/Albums";
-import Users from "./modules/users/Users";
+import Dashboard from "./modules/Dashboard/Dashboard";
+import Albums from "./modules/Albums/Albums";
+import Users from "./modules/Users/Users";
 
 const UserContext = themeContext;
 
@@ -17,9 +17,9 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path={"/"} exact component={Home} />
-          <Route path={"/dashboard"} component={Dashboard} />
-          <Route path={"/albums"} component={Albums} />
-          <Route path={"/users"} component={Users} />
+          <Route path={"/Dashboard"} component={Dashboard} />
+          <Route path={"/Albums"} component={Albums} />
+          <Route path={"/Users"} component={Users} />
           <Route path={"/contacts"} component={Contacts} />
         </Switch>
       </BrowserRouter>

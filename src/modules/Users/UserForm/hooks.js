@@ -4,7 +4,7 @@ import { USERS_URL } from "../../../constants/constants";
 import React, { useCallback, useEffect, useState } from "react";
 import FormFields from "../FormFields/FormFields";
 
-export function useForm() {
+export function useEditUser() {
   const { id } = useParams();
   const { data, setData, saveUser, loader } = useData(USERS_URL + id);
   const [form, setForm] = useState(null);
@@ -24,10 +24,7 @@ export function useForm() {
   function save(e) {
     if (checkFields()) {
       e.preventDefault();
-      saveUser(data);
-      setTimeout(() => {
-        history.push("/users/");
-      }, 500);
+      saveUser(data).then((res) => history.push("/Users/"));
     } else {
       e.preventDefault();
       alert("Something is wrong!");

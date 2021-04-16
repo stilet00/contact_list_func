@@ -15,13 +15,14 @@ import SingleAlbum from "./SingleAlbum/SingleAlbum";
 import { useData, useShowMore } from "../../common/hooks";
 import { ALBUMS_URL } from "../../constants/constants";
 import ShowMore from "../../components/ShowMore/ShowMore";
+import Loader from "../../components/Loader/Loader";
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
 function Albums(props) {
-  const { data, loader } = useData(ALBUMS_URL);
+  const { data, loading } = useData(ALBUMS_URL);
   const { theme } = useContext(themeContext);
   const { renderedItems, showMore, backToMinimal } = useShowMore(data);
   const classes = useStyles();
@@ -46,7 +47,9 @@ function Albums(props) {
               </td>
             </TableRow>
             <TableRow>
-              <td>{loader}</td>
+              <td>
+                <Loader loading={loading} />
+              </td>
             </TableRow>
             <TableRow>
               <TableCell align="left">
@@ -62,7 +65,14 @@ function Albums(props) {
               return <SingleAlbum album={item} key={item.id} />;
             })}
             <TableRow>
-              <td><ShowMore data={data} showMore={showMore} backToMinimal={backToMinimal} renderedItems={renderedItems}/></td>
+              <td>
+                <ShowMore
+                  data={data}
+                  showMore={showMore}
+                  backToMinimal={backToMinimal}
+                  renderedItems={renderedItems}
+                />
+              </td>
             </TableRow>
           </TableBody>
         </Table>

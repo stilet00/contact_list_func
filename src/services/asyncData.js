@@ -26,7 +26,7 @@ export function edit(data, url) {
   });
 }
 
-// for users
+// for Users
 
 export function editUser(data, url) {
   return axios.put(url, { ...data });
